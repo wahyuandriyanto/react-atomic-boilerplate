@@ -1,8 +1,10 @@
 import React from 'react'
 
-import GlobalStyle from 'styles/GlobalStyles'
+
 import ReactDOM from 'react-dom'
 import App from './App'
+import 'styles/antStyles.less'
+import GlobalStyle from 'styles/GlobalStyles'
 
 const { PUBLIC_URL } = process.env;
 
