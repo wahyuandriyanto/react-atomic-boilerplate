@@ -1,12 +1,11 @@
-import Homepage from "components/pages/homepage/Homepage";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from 'Routes';
 
-
-function App() {
-	return (
-		<div className="App">
-			<Homepage />
-		</div>
-	);
+export default function App({ basename }) {
+    return (
+        <BrowserRouter basename={basename}>
+			<Routes />
+        </BrowserRouter> 
+    );
 }
-
-export default App;
