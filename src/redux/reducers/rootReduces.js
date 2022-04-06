@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
-import example from './example/example'
+import { combineReducers } from 'redux';
+import toDoList from './to-do-list/toDoList';
 
 export default combineReducers({
-    example: example
+    toDoList: toDoList
 });
