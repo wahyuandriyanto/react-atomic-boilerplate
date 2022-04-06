@@ -1,14 +1,14 @@
 import React, { lazy, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-const Homepage  = lazy(() => import('components/pages/homepage/Homepage'))
+const ToDoList  = lazy(() => import('components/pages/to-do-list/ToDoList'))
 
 
 export function Routes() {
     return (
         <Suspense fallback="">
             <Switch>
-                <Route exact path="/" component={Homepage} />
+                <Route exact path="/" component={ToDoList} />
             </Switch>
         </Suspense>
     );
