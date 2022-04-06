@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Typography } from 'antd';
 
 import { StyledDataTable } from './Styled';
+import ModalEditData from 'components/molecules/to-do-list/ModalEditData';
 
 const { Column } = Table;
 const { Text }   = Typography;
 
 const DataTable = ({ data }) => {
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [selectedData, setSelectedData] = useState({});
+
+    const handleEditData = (data) => {
+        setIsModalVisible(true);
+        setSelectedData(data);
+    }
 
     return (
         <StyledDataTable>
@@ -17,9 +26,14 @@ const DataTable = ({ data }) => {
             >
                 <Column 
                     title="Title"
-                    dataIndex="title" 
                     render={(data) => (
-                        <Text type="secondary">{data}</Text>
+                        <Text 
+                            type="primary" 
+                            onClick={() => handleEditData(data)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            {data.title}
+                        </Text>
                     )} 
                 />
                 <Column 
@@ -38,7 +52,14 @@ const DataTable = ({ data }) => {
                         </Text>
                     )} 
                 />
-            </Table> 
+            </Table>
+            {isModalVisible && (
+                <ModalEditData 
+                    isModalVisible={isModalVisible} 
+                    onCancel={() => setIsModalVisible(false)}
+                    selectedData={selectedData}
+                />
+            )} 
         </StyledDataTable>
     )
 }
