@@ -8,7 +8,7 @@ module.exports = {
                 lessLoaderOptions: {
                     lessOptions: {
                         modifyVars: { 
-                            '@primary-color': '#7800EF',
+                            '@primary-color': '#07c53c',
                             '@border-radius-base': '2px', // major border radius,
                             '@font-family': 'SF Pro Display',
                             '@font-size-base': '16px', // major text font size
