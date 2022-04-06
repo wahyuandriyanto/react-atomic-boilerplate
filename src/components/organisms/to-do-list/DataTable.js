@@ -7,7 +7,7 @@ import { StyledDataTable } from './Styled';
 const { Column } = Table;
 const { Text }   = Typography;
 
-const DataTable = ({ data, type }) => {
+const DataTable = ({ data }) => {
 
     return (
         <StyledDataTable>
@@ -45,7 +45,6 @@ const DataTable = ({ data, type }) => {
 
 DataTable.propTypes = {
     data : PropTypes.array,
-    type : PropTypes.oneOf(['complete', 'inComplete']),
 
 };
 

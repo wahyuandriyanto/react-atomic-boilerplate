@@ -7,6 +7,7 @@ import { Col, Row, Alert, notification, Spin } from 'antd';
 import { ApiCall } from 'utils/ApiCall';
 
 import { StyledToDoList } from './Styled';
+import _ from 'lodash';
 
 const ToDoList = () => {
     const toDoList = useSelector(select => select.toDoList);
@@ -34,6 +35,9 @@ const ToDoList = () => {
         }
     },[toDoList, dispatch])
 
+    const completedList     = _.filter(toDoList, { 'status': 1 });
+    const inCompletedList   = _.filter(toDoList, { 'status': 0 });
+
     useEffect(() => {
         getData();
     }, [getData])
@@ -45,11 +49,11 @@ const ToDoList = () => {
                 <Row gutter={24}>
                     <Col span={12}>
                         <Alert message="Complete" type="success" showIcon />
-                        <DataTable data={toDoList} type="complete" />
+                        <DataTable data={completedList} />
                     </Col>
                     <Col span={12}>
                         <Alert message="Incomplete" type="error" showIcon />
-                        <DataTable data={toDoList} type="inComplete" />
+                        <DataTable data={inCompletedList} />
                     </Col>
                 </Row>
             </Spin>
