@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Form, Input, Select, Space, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 const { Option } = Select;
 
 const ModalEditData = ({ isModalVisible, onCancel, selectedData }) => {
 
+    const toDoList = useSelector(select => select.toDoList);
+    const dispatch = useDispatch();
+    const [data, setData] = useState(toDoList);
+
     const handleEditData = (data) => {
-        console.log(data);
+        const newArr = _.map(toDoList, function(obj) {
+            return obj.id === selectedData.id ? {
+                ...selectedData,
+                ...data
+            } : obj
+        })
+        setData(newArr);
+        onCancel();
     }
+
+    const handleDeleteData = () => {
+        const newArr = _.filter(toDoList, function(obj) {
+            return obj.id !== selectedData.id
+        })
+        setData(newArr);
+        setTimeout(() => {
+            onCancel();
+        }, 100);
+    }
+    
+    useEffect(() => {
+        dispatch({
+            type    : 'SET_TO_DO_LIST',
+            payload : data
+        })
+    }, [data, dispatch])
+    
 
     return (
         <Modal title="Edit Data" visible={isModalVisible} onCancel={onCancel} footer={null}>
@@ -48,7 +79,7 @@ const ModalEditData = ({ isModalVisible, onCancel, selectedData }) => {
                 <Form.Item >
                     <Space style={{ width: '100%', justifyContent: 'flex-end' }} size={8}>
                         {selectedData.status === 1 && (
-                            <Button type="primary" danger>Delete</Button>
+                            <Button type="primary" danger onClick={handleDeleteData}>Delete</Button>
                         )} 
                         <Button type="primary" htmlType="submit">Update</Button>
                     </Space>

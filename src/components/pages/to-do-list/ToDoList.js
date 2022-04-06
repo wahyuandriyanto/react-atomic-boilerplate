@@ -15,25 +15,23 @@ const ToDoList = () => {
     const [loading, setLoading] = useState(false);
 
     const getData = useCallback(() => {
-        if (toDoList.length === 0) {
-            setLoading(true);
-            ApiCall.get('/hanabyan/todo/1.0.0/to-do-list')
-            .then((res) => {
-                dispatch({
-                    type    : 'SET_TO_DO_LIST',
-                    payload : res.data
-                })
-                setLoading(false);
+        setLoading(true);
+        ApiCall.get('/hanabyan/todo/1.0.0/to-do-list')
+        .then((res) => {
+            dispatch({
+                type    : 'SET_TO_DO_LIST',
+                payload : res.data
             })
-            .catch(() => {
-                notification.error({
-                    message: 'ERROR',
-                    description: 'Please contact your api division!',
-                });
-                setLoading(false);
-            })
-        }
-    },[toDoList, dispatch])
+            setLoading(false);
+        })
+        .catch(() => {
+            notification.error({
+                message: 'ERROR',
+                description: 'Please contact your api division!',
+            });
+            setLoading(false);
+        })
+    },[dispatch])
 
     const completedList     = _.filter(toDoList, { 'status': 1 });
     const inCompletedList   = _.filter(toDoList, { 'status': 0 });
@@ -41,7 +39,7 @@ const ToDoList = () => {
     useEffect(() => {
         getData();
     }, [getData])
-    
+
     return (
         <StyledToDoList>
             <PageHeader />
