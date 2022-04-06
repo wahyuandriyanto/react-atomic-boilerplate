@@ -5,7 +5,7 @@ This is a boilerplate with the methodology Atomic Design and using a few cool th
 ## Setup
 ### 1. Clone the repository
 ```
-$ git clone -b master git@github.com:wahyuandriyanto/react-atomic-boilerplate.git my-app
+$ git clone -b master git@github.com:wahyuandriyanto/react-atomic-design-boilerplate.git my-app
 $ cd my-app
 ```
 You will probably want to remove git history and start a brand new repository:
